@@ -15,7 +15,7 @@ body {
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
     opacity: 0;
     animation: fadeInBody 2s forwards;
 }
@@ -41,11 +41,9 @@ h1 {
     width: 90%;
 }
 
-/* Scrollable text */
+/* Main text and message */
 .scroll-box {
     display: none;
-    max-height: 300px;
-    overflow-y: auto;
     margin-top: 15px;
     padding: 10px 20px;
     background: rgba(0,0,0,0.2);
@@ -56,23 +54,16 @@ h1 {
     font-size: 1.1em;
     word-wrap: break-word;
 }
-.scroll-box::-webkit-scrollbar {
-    width: 8px;
-}
-.scroll-box::-webkit-scrollbar-thumb {
-    background: #ff4da6;
-    border-radius: 4px;
-}
 .scroll-box.glow { text-shadow: 0 0 8px #ffb3d9, 0 0 16px #ff4da6, 0 0 24px #ff99cc; }
 
-/* BUTTONS */
+/* Buttons */
 button { margin: 8px; padding:10px 20px; background:#ff4da6; border:none; border-radius:20px; color:white; cursor:pointer; box-shadow:0 0 10px #ff4da6; }
 button:hover { transform: scale(1.05); }
 
 /* QR code style */
 #qr { margin-top: 20px; }
 
-/* STARS, HEARTS, FLOWERS, GIFT (keep your previous styles) */
+/* Stars, hearts, flowers, gift box styles remain */
 .star { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; animation: moveStar linear infinite, twinkle 2s infinite alternate; }
 @keyframes moveStar { to { transform: translateY(-120vh); } }
 @keyframes twinkle { from { opacity:0.2;} to{opacity:1;} }
@@ -90,7 +81,7 @@ button:hover { transform: scale(1.05); }
 .firework { position:absolute; font-size:20px; animation: fireworkAnim 1s ease-out forwards; }
 @keyframes fireworkAnim { from { transform: scale(0); opacity:1;} to { transform: scale(2) translate(var(--x), var(--y)); opacity:0;} }
 
-.gift { width: 180px; height: 180px; position: relative; cursor: pointer; perspective: 800px; }
+.gift { width: 180px; height: 180px; position: relative; cursor: pointer; perspective: 800px; transition: opacity 0.5s ease; }
 .gift-box { width: 100%; height: 100%; background: linear-gradient(145deg, #ff4da6, #ff99cc); box-shadow: 0 0 20px #ff4da6, 0 0 50px #ff4da6; position: relative; overflow: hidden; }
 .gift-box::after { content:""; position:absolute; width:100%; height:100%; background: radial-gradient(circle, rgba(255,255,255,0.8), transparent 70%); opacity:0; transition:opacity 0.5s ease; }
 .gift.open .gift-box::after { opacity:1; }
@@ -167,6 +158,7 @@ function openGift(){
     setTimeout(()=>{
         gift.classList.remove("shake");
         gift.classList.add("open");
+        gift.style.display="none"; // DISAPPEAR
         document.getElementById("bgMusic").style.display="block";
         setTimeout(()=>{
             document.getElementById("mainText").style.display="block";
@@ -234,5 +226,6 @@ Happy birthday again  my fav ♥️`;
     }
 }
 </script>
+
 </body>
 </html>
