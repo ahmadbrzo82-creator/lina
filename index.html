@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxury Birthday Gift 🎁</title>
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at top, #ff4da6, #000000 70%);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    padding-bottom: 40px;
+    opacity: 0;
+    animation: fadeInBody 2s forwards;
+}
+@keyframes fadeInBody { to { opacity: 1; } }
+
+h1 {
+    color: #ffb3d9;
+    text-shadow: 0 0 15px #ff4da6;
+    margin: 0;
+    padding-top: 50px;
+    text-align: center;
+    font-size: 2.2em;
+    animation: pulse 1.5s infinite alternate;
+}
+@keyframes pulse { from { transform: scale(1); } to { transform: scale(1.05); } }
+
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+}
+
+/* Main text and message */
+.scroll-box {
+    display: none;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 15px;
+    line-height: 1.7em;
+    color: #ffd6eb;
+    text-align: center;
+    font-size: 1.1em;
+    word-wrap: break-word;
+}
+.scroll-box.glow { text-shadow: 0 0 8px #ffb3d9, 0 0 16px #ff4da6, 0 0 24px #ff99cc; }
+
+/* Buttons */
+button { margin: 8px; padding:10px 20px; background:#ff4da6; border:none; border-radius:20px; color:white; cursor:pointer; box-shadow:0 0 10px #ff4da6; }
+button:hover { transform: scale(1.05); }
+
+/* QR code style */
+#qr { margin-top: 30px; }
+
+/* Stars, hearts, flowers, gift box styles remain */
+.star { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; animation: moveStar linear infinite, twinkle 2s infinite alternate; }
+@keyframes moveStar { to { transform: translateY(-120vh); } }
+@keyframes twinkle { from { opacity:0.2;} to{opacity:1;} }
+
+.heart { position: absolute; font-size: 24px; animation: floatHeart linear infinite; pointer-events: none; transition: text-shadow 0.5s ease, transform 0.5s ease; }
+@keyframes floatHeart { to { transform: translateY(-120vh) rotate(360deg); } }
+.pulse { text-shadow: 0 0 10px #ffb3d9, 0 0 20px #ff4da6, 0 0 30px #ff99cc; transform: scale(1.2); }
+
+.flower { position:absolute; bottom:-100px; font-size:28px; animation: floatFlower linear infinite; pointer-events: none; }
+@keyframes floatFlower { to { transform: translateY(-120vh) rotate(360deg); } }
+
+.particle { position: absolute; width: 6px; height: 6px; background: white; border-radius: 50%; animation: explode 0.8s ease-out forwards; }
+@keyframes explode { from { transform: scale(1) translate(0,0); opacity:1; } to { transform: scale(0.5) translate(var(--x), var(--y)); opacity:0; } }
+
+.firework { position:absolute; font-size:20px; animation: fireworkAnim 1s ease-out forwards; }
+@keyframes fireworkAnim { from { transform: scale(0); opacity:1;} to { transform: scale(2) translate(var(--x), var(--y)); opacity:0;} }
+
+.gift { width: 180px; height: 180px; position: relative; cursor: pointer; perspective: 800px; transition: opacity 0.5s ease; }
+.gift-box { width: 100%; height: 100%; background: linear-gradient(145deg, #ff4da6, #ff99cc); box-shadow: 0 0 20px #ff4da6, 0 0 50px #ff4da6; position: relative; overflow: hidden; }
+.gift-box::after { content:""; position:absolute; width:100%; height:100%; background: radial-gradient(circle, rgba(255,255,255,0.8), transparent 70%); opacity:0; transition:opacity 0.5s ease; }
+.gift.open .gift-box::after { opacity:1; }
+
+.gift-top { position: absolute; width: 100%; height: 60px; top: 0; background: linear-gradient(45deg,#ffe6f0,#ff4da6); transition: transform 0.5s ease, top 0.5s ease; z-index: 2; box-shadow: inset 0 5px 15px rgba(255,255,255,0.3); overflow: hidden; }
+.gift-top::before { content:""; position:absolute; top:0; left:-50%; width:50%; height:100%; background: rgba(255,255,255,0.3); transform: skewX(-25deg); animation: none; }
+.gift.open .gift-top::before { animation: sparkle 1.2s linear forwards; }
+@keyframes sparkle { from { left:-50%; } to { left:150%; } }
+@keyframes liftLid { 0% { top:0; transform:scale(1); } 60% { top:-90px; transform:scale(1.08); } 100% { top:-80px; transform:scale(1.05); } }
+.gift.open .gift-top { animation: liftLid 0.6s ease forwards; }
+
+.ribbonV { position:absolute; width:20px; height:100%; background:white; left:80px; top:0; z-index:3; }
+.ribbonH { position:absolute; height:20px; width:100%; background:white; top:80px; left:0; z-index:3; }
+
+@keyframes shakeBox { 0% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } 100% { transform: translateX(0); } }
+.gift.shake { animation: shakeBox 0.4s ease; }
+</style>
+</head>
+<body>
+
+<h1>💖 Tap the gift 💖</h1>
+
+<div class="container">
+    <div class="gift" onclick="openGift()">
+        <div class="gift-box"></div>
+        <div class="gift-top"></div>
+        <div class="ribbonV"></div>
+        <div class="ribbonH"></div>
+    </div>
+
+    <div id="mainText" class="scroll-box">💖 Happy birthday my favvvv person 💖</div>
+
+    <div id="btn1" style="display:none;">
+        <button onclick="showName()">Who is my fav person? 💭</button>
+    </div>
+
+    <div id="name" class="scroll-box"></div>
+
+    <div id="btn2" style="display:none;">
+        <button onclick="showMessage()">I wanna say 💌</button>
+    </div>
+
+    <div id="sayText" class="scroll-box typing"></div>
+</div>
+
+<!-- YouTube Music -->
+<div id="bgMusic" style="display:none;">
+    <iframe id="ytMusic" width="0" height="0"
+        src="https://www.youtube.com/embed/nmWXjWI3sZU?autoplay=1&loop=1&playlist=nmWXjWI3sZU"
+        title="YouTube music player" frameborder="0"
+        allow="autoplay; encrypted-media" allowfullscreen>
+    </iframe>
+</div>
+
+<!-- QR Code -->
+<div id="qr">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?data=https%3A%2F%2Fahmadbrzo82-creator.github.io%2Flinazq%2F&size=200x200" alt="Scan to open">
+</div>
+
+<script>
+// Stars
+for(let i=0;i<100;i++){let s=document.createElement("div");s.className="star";s.style.top=Math.random()*100+"vh";s.style.left=Math.random()*100+"vw";s.style.animationDuration=(5+Math.random()*10)+"s,2s";document.body.appendChild(s);}
+
+// Hearts
+let hearts=[];for(let i=0;i<20;i++){let h=document.createElement("div");h.className="heart";h.innerHTML="💖";h.style.left=Math.random()*100+"vw";h.style.animationDuration=(5+Math.random()*5)+"s";document.body.appendChild(h);hearts.push(h);}
+
+// Flowers
+function createFlowers(){for(let i=0;i<20;i++){let f=document.createElement("div");f.className="flower";f.innerHTML="🌸";f.style.left=Math.random()*100+"vw";f.style.animationDuration=(5+Math.random()*5)+"s";document.body.appendChild(f);}}
+
+// Open gift
+function openGift(){
+    const gift=document.querySelector(".gift");
+    gift.classList.add("shake");
+    setTimeout(()=>{
+        gift.classList.remove("shake");
+        gift.classList.add("open");
+        gift.style.display="none"; // DISAPPEAR
+        document.getElementById("bgMusic").style.display="block";
+        setTimeout(()=>{
+            document.getElementById("mainText").style.display="block";
+            document.getElementById("btn1").style.display="block";
+        },400);
+        for(let i=0;i<50;i++){
+            let p=document.createElement("div");p.className="particle";p.style.left="50%";p.style.top="50%";
+            p.style.setProperty('--x',(Math.random()-0.5)*500+"px");
+            p.style.setProperty('--y',(Math.random()-0.5)*500+"px");
+            document.body.appendChild(p);setTimeout(()=>p.remove(),800);
+        }
+        for(let i=0;i<15;i++){
+            let f=document.createElement("div");f.className="firework";f.innerHTML="🎆";
+            f.style.left=Math.random()*100+"vw"; f.style.top=Math.random()*50+"vh";
+            f.style.setProperty('--x',(Math.random()-0.5)*300+"px");
+            f.style.setProperty('--y',(Math.random()-0.5)*300+"px");
+            document.body.appendChild(f); setTimeout(()=>f.remove(),1000);
+        }
+        createFlowers();
+    },400);
+}
+
+// Show name
+function showName(){
+    const nameDiv=document.getElementById("name");
+    nameDiv.style.display="block";
+    nameDiv.innerHTML="💖 Lina lin linnnnn 💖";
+    document.getElementById("btn2").style.display="block";
+}
+
+// Show message
+function showMessage(){
+    const t=document.getElementById("sayText");
+    t.style.display="block";
+    t.innerHTML="";
+    t.classList.remove("glow");
+    hearts.forEach(h=>h.classList.remove("pulse"));
+    const message=`happiest birthday lina wish you all the best and inshallah hamu kat xwa bashtrint ba qsmat ka , because GIRLLL U DESERVE EVERY GOOD THING, and hope you know that U R the besttt person to me, should i drop a compliment? yesss SUREEE
+
+GIRLL YOU ARE THE PRETTIEST PERSON I HAVE EVER SEEN 
+ALSO THE SWEETEST, CUTEST, & KINDEST 🫶🏻
+
+Happy birthday again  my fav ♥️`;
+    let i=0;
+    function typeWriter(){
+        if(i<message.length){
+            let char=message.charAt(i);if(char==="\n")char="<br>";
+            t.innerHTML+=char;i++;
+            setTimeout(typeWriter,160);
+        } else {
+            t.classList.add("glow");
+            hearts.forEach(h=>h.classList.add("pulse"));
+        }
+    }
+    typeWriter();
+    for(let i=0;i<25;i++){
+        let f=document.createElement("div");
+        f.className="particle";
+        f.style.left="50%";
+        f.style.top="50%";
+        f.style.setProperty('--x',(Math.random()-0.5)*300+"px");
+        f.style.setProperty('--y',(Math.random()-0.5)*300+"px");
+        document.body.appendChild(f);
+        setTimeout(()=>f.remove(),1000);
+    }
+}
+</script>
+</body>
+</html>
